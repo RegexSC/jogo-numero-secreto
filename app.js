@@ -1,7 +1,8 @@
 let listaDeNumerosSorteados = [];
 let numeroLimite = 10;
 let numeroSecreto = gerarNumeroAleatorio();
-let tentativas = 1;
+let tentativas = 0;
+let listaDchutes=[];
 
 function exibirTextoNaTela(tag, texto) {
     let campo = document.querySelector(tag);
@@ -32,6 +33,7 @@ function verificarChute() {
             exibirTextoNaTela('p', `O número secreto é maior que ${chute}`);
         }
         tentativas++;
+        gerarHistorico();
         limparCampo();
     }
 }
@@ -58,11 +60,20 @@ function limparCampo() {
 }
 
 function reiniciarJogo() {
+    listaDchutes=[];
     numeroSecreto = gerarNumeroAleatorio();
     limparCampo();
-    tentativas = 1;
+    tentativas = 0;
     exibirMensagemInicial();
     document.getElementById('reiniciar').setAttribute('disabled', true)
+}
+
+function gerarHistorico() {
+    let chute = document.querySelector('input').value; 
+    let lista = document.getElementById("historico"); 
+    lista.innerHTML=listaDchutes          
+    listaDchutes.push(chute);
+    return chute;    
 }
 
 
